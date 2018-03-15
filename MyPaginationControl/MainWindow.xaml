@@ -1,0 +1,28 @@
+﻿<Window x:Class="MyPaginationControl.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyPaginationControl"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="400" Width="600" DataContext="{StaticResource MainViewModel}" WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0" CanUserAddRows="False" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding PageStudents,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Age" Binding="{Binding Age}" Width="*"/>
+                <DataGridTextColumn Header="Birthday" Binding="{Binding Birthday}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <local:DataPager Grid.Row="1" Height="40" Style="{StaticResource DataPagerStyle}" MaxCenterPageCount="5"
+                         CurrentPageIndex="{Binding CurrentPageIndex,Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}" 
+                         TotalCount="{Binding Students.Count,UpdateSourceTrigger=PropertyChanged}" 
+                         PageSize="{Binding PageSize,Mode=OneTime}" />
+        <!--<Path Stretch="Fill" Margin="10" Data="M0,3 10,3 10,6 0,6z M10,0 10,9 19,4.5z" Fill="Red"  VerticalAlignment="Center" HorizontalAlignment="Center"/>-->
+    </Grid>
+</Window>
