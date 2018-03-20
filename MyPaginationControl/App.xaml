@@ -7,9 +7,6 @@
     <Application.Resources>
         <ResourceDictionary>
             <viewModel:MainViewModel x:Key="MainViewModel"/>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles\DataPagerStyle.xaml" />
-            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
