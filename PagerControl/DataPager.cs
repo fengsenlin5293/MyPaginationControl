@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace PagerControl
 {
@@ -189,6 +190,7 @@ namespace PagerControl
             if (this._GoTextBox != null)
             {
                 this._GoTextBox.Text = string.Empty;
+                this._GoTextBox.PreviewKeyDown -= _GoTextBox_PreviewKeyDown;
             }
 
             base.OnApplyTemplate();
@@ -229,9 +231,14 @@ namespace PagerControl
             }
 
             this._GoTextBox = (base.GetTemplateChild("PART_GoTextBox")) as TextBox;
+            if (_GoTextBox != null)
+            {
+                this._GoTextBox.PreviewKeyDown += _GoTextBox_PreviewKeyDown;
+            }
 
             Init();
         }
+            
         #endregion
 
         #region private methods
@@ -303,6 +310,20 @@ namespace PagerControl
         }
 
         private void _GoButtonBtn_Click(object sender, RoutedEventArgs e)
+        {
+            GoToPage();
+        }
+            
+
+        private void _GoTextBox_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                GoToPage();
+            }
+        }
+
+        private void GoToPage()
         {
             if (_GoTextBox == null)
                 return;
